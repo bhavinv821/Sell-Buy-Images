@@ -1,0 +1,21 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add Product</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+
+		<form th:action="@{/updateProductDetails}" th:object="${product}" >
+                    <input type="text" name="name" th:value="${product.name}">
+                    <input type="text" name="description" th:value="${product.description}">
+                    <input type="text" name="price" th:value="${product.price}">
+                    <input type="text" name="discount" th:value="${product.discount}">
+                    <button type="submit">Update</button>
+               </form>	
+</body>
+</html>
+
+<!-- Default form subscription -->

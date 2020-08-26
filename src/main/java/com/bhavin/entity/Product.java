@@ -17,6 +17,8 @@ public class Product {
 	private String name;
 	private String description;
 	private int price;
+	private int discount;
+	
 	@Lob
 	@Column(columnDefinition = "MEDIUMBLOB")
 	private String image;
@@ -50,12 +52,17 @@ public class Product {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	@Override
-	public String toString() {
-		return "Product [id=" + id + ", name=" + name + ", description=" 
-	            + description + ", price=" + price + ", image="
-				+ image + "]";
+	public int getDiscount() {
+		return discount;
+	}
+	public void setDiscount(int discount) {
+		this.discount = discount;
 	}
 	
-
+	@Override
+	public String toString() {
+		return "Product [id=" + id + ", name=" + name + ", description=" + description + ", price=" + price
+				+ ", discount=" + discount + ", image=" + image + "]";
+	}
+	
 }

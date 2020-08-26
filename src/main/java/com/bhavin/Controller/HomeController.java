@@ -26,7 +26,6 @@ public class HomeController {
 	@Autowired 
 	private ProductRepositry productRepo;
 	
-	
 	@Autowired
 	private ProductService productService;
 	
@@ -73,17 +72,38 @@ public class HomeController {
     	
     	return "/index.html";
     }
+
+    @GetMapping("/editProductForm")
+    public String edit()
+    {
+    	
+    	return "/editProductForm.html";
+    }
     
     @PostMapping("/addP")
     public String saveProduct(@RequestParam("file") MultipartFile file,
     		@RequestParam("pname") String name,
     		@RequestParam("price") int price,
+    		@RequestParam("discount") int discount,
     		@RequestParam("desc") String desc)
+    		
     {
-    	System.out.println("inside addP\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    	productService.saveProductToDB(file, name, desc, price);
-    	return "redirect:/listProducts.html";
+    	productService.saveProductToDB(file, name, desc, price,discount);
+    	return "listProducts.html";
     }
+ 
+    
+    @GetMapping("/updateProduct/{id}")
+    public String updateProduct(@PathVariable("id") Long id, Model model)
+    {
+    	
+    	Product p = productService.getProductById(id);
+    	System.out.println(id+"\n\n\n\n\n\n\n"+p.getDescription());
+    	model.addAttribute("product", p);
+    	return "redirect:/editProductForm.html";
+    }
+    
+    
     
     @GetMapping("/deleteProd/{id}")
     public String deleteProduct(@PathVariable("id") Long id)

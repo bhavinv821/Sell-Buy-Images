@@ -3,6 +3,7 @@ package com.bhavin.service;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ public class ProductService {
 	private ProductRepositry productRepo;
 	
 	public void  saveProductToDB(MultipartFile file,String name,String description
-			,int price)
+			,int price, int discount)
 	{
 		Product p = new Product();
 		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
@@ -35,6 +36,7 @@ public class ProductService {
 		
         p.setName(name);
         p.setPrice(price);
+        p.setDiscount(discount);
         
         productRepo.save(p);
 	}
@@ -42,6 +44,15 @@ public class ProductService {
 	{
 		return productRepo.findAll();
 	}
+	
+	
+	public Product getProductById(Long id)
+	{
+		return productRepo.findById(id).get();
+	
+	}
+	
+	
     public void deleteProductById(Long id)
     {
     	productRepo.deleteById(id);
